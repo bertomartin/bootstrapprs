@@ -1,11 +1,11 @@
 
-require "bundler/capistrano"
+
 
 load 'config/deploy/recipes/base'
 
 server "198.211.114.28", :web, :app, :db, primary: true
 
-set :application, "bootstrappr"
+set :application, "bootstrapprs"
 set :domain, "bootstrapprs.com"
 set :user, "deployer"
 set :deploy_to, "/home/#{user}/apps/#{application}"
@@ -30,6 +30,10 @@ namespace :deploy do
     run "touch #{deploy_to}/current/tmp/restart.txt"
   end
 
+  task :cold do
+    run "cd #{release_path}; rake install_dependencies"
+  end
+  before "deploy:cold", "deploy"
 
   task :setup_config, roles: :app do
     run "mkdir -p #{shared_path}/config"
