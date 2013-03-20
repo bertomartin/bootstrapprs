@@ -1,0 +1,24 @@
+#contact.block
+  .inner
+    %article
+      %header.section-header
+        %h1 Contact
+      %section.entry
+        .gw
+          .g.one-whole.desk-two-fifths
+            %h4 Get In Touch
+            %p Please use this form to send us a brief message. We'll be in touch shortly.
+          .g.one-whole.desk-three-fifths
+            %form{:action=>"/", :method => "post"}
+              %ul.form-fields.gw
+                %li.g.one-whole.desk-one-half
+                  %label{:for=>"first-name"} First Name
+                  %input#name.text-input{:type=>"text", :name=>"contact[name]"}
+                %li.g.one-whole.desk-one-half
+                  %label{:for=>"email"} Email
+                  %input#email.text-input{:type=>"email", :name=>"contact[email]"}
+                %li.g.one-whole.desk-one-whole
+                  %label{:for=>"message"} Message
+                  %textarea{:placeholder=>"Remember, be nice!", :cols=>"30", :rows=>"5", :name=>"contact[message]"}
+                %li.g.one-whole.desk-one-sixths
+                  %input{:type=>"submit", :value=>"Send"}

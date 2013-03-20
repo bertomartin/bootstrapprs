@@ -1,0 +1,96 @@
+!!! Strict
+%html
+  %head
+    %title=@title
+    /[if lt IE 9]
+      %script{:src => "//html5shiv.googlecode.com/svn/trunk/html5.js"}
+    /[if lt IE 7]
+      %link(rel="stylesheet" href="css/font-awesome-ie7.min.css")
+    %link(rel="stylesheet" href="css/style.css")
+
+    /icon fonts
+    %link(rel="stylesheet" href="css/font-awesome.min.css")
+
+    /text fonts via google
+    %link{:rel => "stylesheet", :href=>"http://fonts.googleapis.com/css?family=Ubuntu:300,500,300italic"}
+    /%link{:rel=>"stylesheet", :href=>"http://fonts.googleapis.com/css?family=Bevan"}
+    %link{:rel=>"stylesheet", :href=>"http://fonts.googleapis.com/css?family=Pontano+Sans"}
+
+    %link(rel="shortcut icon" href="img/icon.png")
+    %link(rel="apple-touch-icon-precomposed" href="icon.png")
+    %link(rel="author" href="humans.txt" type="text/plain")
+
+    /meta
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+    %meta{:name => "apple-mobile-web-app-title", :content => ""}
+
+    /js
+    %script{:type => "text/javascript", :src => "js/custom.modernizr.js"}
+
+    /TODO - update
+    :javascript
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-30136587-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+  %body
+    =haml :_header
+    =haml :_masthead
+    =haml :_mainnav
+    #main-content.wrap
+      = yield
+    =haml :_footer
+
+    /include js libs
+    %script{:type=>"text/javascript", :src=>"js/jquery.js"}
+    %script{:type=>"text/javascript", :src=>"js/respond.min.js"}
+    %script{:type=>"text/javascript", :src=>"js/jquery-scrollspy.js"}
+    %script{:type=>"text/javascript", :src=>"js/jquery.smooth-scroll.js"}
+
+    /include foundation
+    %script{:type=>"text/javascript", :src=>"js/foundation.js"}
+    %script{:type=>"text/javascript", :src=>"js/foundation.orbit.js"}
+
+    :javascript
+      $(document).foundation('orbit', {bullets:false}, function (response) {
+        console.log(response.errors);
+      });
+
+      $(document).ready(function() {
+          $('#main-navigation').scrollspy({
+          min: $('#main-navigation').offset().top,
+          onEnter: function(element, position) {
+            $("#main-navigation").addClass('fixed');
+          },
+          onLeave: function(element, position) {
+            $("#main-navigation").removeClass('fixed');
+          }
+          });
+        });
+
+      $(document).ready(function() {
+
+        $('#main-navigation .inner nav ul li a').smoothScroll({offset:-100});
+
+      });
+
+      $(window).load(function() {
+          $('#featured2').orbit(
+            {stack_on_small: true,
+              bullets: true,
+              animation:'fade'
+            });
+      });
+
+
+
+
+
+
+
