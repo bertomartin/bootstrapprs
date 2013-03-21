@@ -23,7 +23,7 @@ post '/' do
   Pony.mail(
     :to => 'bootstrapprs@gmail.com',
     :subject => params[:contact][:name] + " has contacted bootstrapprs",
-    :body => params[:contact][:message],
+    :body => params[:contact][:message] + "<br/> " + params[:contact][:email],
     :port => '587',
     :via => :smtp,
   :via_options => {
